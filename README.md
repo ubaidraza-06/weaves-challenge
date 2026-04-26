@@ -1,4 +1,4 @@
-# ThreadPath — Weaves E-Commerce UX Proposal
+# Weaves E-Commerce UX Proposal
 
 A single-page interactive prototype for **Weaves**, submitted as part of the **E-Commerce Application Development** internship challenge. **ThreadPath** is a proposed end-to-end shopping experience for fabric and apparel: guided discovery, richer product inspection, and flows aimed at conversion and repeat purchase.
 
