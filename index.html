@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weaves — ThreadPath UI/UX Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">WEAVES<span>.</span></a>
+  <div class="nav-links" id="primary-nav">
+    <a href="#collections">Collections</a>
+    <a href="#finder">Fabric Finder</a>
+    <a href="#explorer">Lookbook</a>
+    <a href="#about">About</a>
+  </div>
+  <div class="nav-actions">
+    <button type="button" class="nav-cart" onclick="showToast('🛍 Cart opened')">Cart (2)</button>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu" onclick="toggleNav()">
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-badge">ThreadPath — New Experience</span>
+    <h1 class="hero-title">Discover Fabric<br><em>Tailored to You</em></h1>
+    <p class="hero-sub">A smarter way to shop. Our AI-guided discovery experience finds the perfect weave for your lifestyle, occasion, and aesthetic in under 60 seconds.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('finder').scrollIntoView({behavior:'smooth'})">Find My Fabric →</button>
+      <button class="btn-outline" onclick="document.getElementById('explorer').scrollIntoView({behavior:'smooth'})">Explore Collection</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-fabric-grid">
+      <div class="fabric-swatch s1"><span class="swatch-label">Tussar Gold</span></div>
+      <div class="fabric-swatch s2"><span class="swatch-label">Forest Linen</span></div>
+      <div class="fabric-swatch s3"><span class="swatch-label">Terra Silk</span></div>
+      <div class="fabric-swatch s4"><span class="swatch-label">Ivory Cotton</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE STRIP -->
+<div class="feature-strip">
+  <div class="feature-item">
+    <svg class="feature-icon" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#C1583A" stroke-width="1.5"/><path d="M12 18a6 6 0 1 1 12 0" stroke="#C1583A" stroke-width="1.5"/><circle cx="18" cy="18" r="2" fill="#C1583A"/></svg>
+    <div class="feature-name">Smart Fabric Finder</div>
+    <div class="feature-desc">Personalised quiz matches you with the right weave based on occasion and preference.</div>
+  </div>
+  <div class="feature-item">
+    <svg class="feature-icon" viewBox="0 0 36 36" fill="none"><rect x="4" y="4" width="28" height="28" rx="2" stroke="#C1583A" stroke-width="1.5"/><circle cx="18" cy="18" r="5" stroke="#C1583A" stroke-width="1.5"/><path d="M18 4v5M18 27v5M4 18h5M27 18h5" stroke="#C1583A" stroke-width="1.5"/></svg>
+    <div class="feature-name">Texture Explorer</div>
+    <div class="feature-desc">Magnify and inspect weave patterns in ultra detail before you buy.</div>
+  </div>
+  <div class="feature-item">
+    <svg class="feature-icon" viewBox="0 0 36 36" fill="none"><rect x="4" y="10" width="28" height="16" rx="2" stroke="#C1583A" stroke-width="1.5"/><circle cx="10" cy="18" r="3" stroke="#C1583A" stroke-width="1.5"/><rect x="16" y="15" width="12" height="3" rx="1.5" fill="#C1583A" opacity="0.4"/><rect x="16" y="20" width="8" height="2" rx="1" fill="#C1583A" opacity="0.3"/></svg>
+    <div class="feature-name">Occasion Tagging</div>
+    <div class="feature-desc">Tag purchases by occasion and reorder in one tap when the season returns.</div>
+  </div>
+  <div class="feature-item">
+    <svg class="feature-icon" viewBox="0 0 36 36" fill="none"><path d="M6 18c0-6.627 5.373-12 12-12s12 5.373 12 12-5.373 12-12 12" stroke="#C1583A" stroke-width="1.5"/><path d="M18 12v6l4 2" stroke="#C1583A" stroke-width="1.5" stroke-linecap="round"/><path d="M6 24l-2 4 4-2" stroke="#C1583A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="feature-name">Express Reorder</div>
+    <div class="feature-desc">Your order history is organised, smart, and always one click from reordering.</div>
+  </div>
+</div>
+
+<!-- THREADPATH FINDER -->
+<section class="section finder-section" id="finder">
+  <p class="section-label">Feature 01 — Smart Discovery</p>
+  <div class="finder-wrap">
+    <div>
+      <div class="finder-card">
+        <div class="finder-steps">
+          <div class="finder-step-dot active" id="dot0"></div>
+          <div class="finder-step-dot" id="dot1"></div>
+          <div class="finder-step-dot" id="dot2"></div>
+        </div>
+
+        <!-- Step 0 -->
+        <div id="step0">
+          <p class="finder-q">What's the occasion you're shopping for?</p>
+          <div class="finder-options">
+            <div class="finder-opt" onclick="selectOpt(this, 'step0')" data-val="wedding">
+              <span class="finder-opt-icon">💍</span> Wedding & Festive
+            </div>
+            <div class="finder-opt" onclick="selectOpt(this, 'step0')" data-val="formal">
+              <span class="finder-opt-icon">👔</span> Formal & Office
+            </div>
+            <div class="finder-opt" onclick="selectOpt(this, 'step0')" data-val="casual">
+              <span class="finder-opt-icon">☀</span> Casual Everyday
+            </div>
+            <div class="finder-opt" onclick="selectOpt(this, 'step0')" data-val="gift">
+              <span class="finder-opt-icon">🎁</span> Gifting
+            </div>
+          </div>
+          <div class="finder-nav">
+            <button class="finder-back" style="visibility:hidden">← Back</button>
+            <button class="finder-next" onclick="nextStep(1)">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div id="step1" style="display:none">
+          <p class="finder-q">How do you prefer to feel in your fabric?</p>
+          <div class="finder-options">
+            <div class="finder-opt" onclick="selectOpt(this, 'step1')" data-val="luxurious">
+              <span class="finder-opt-icon">✨</span> Luxurious & Rich
+            </div>
+            <div class="finder-opt" onclick="selectOpt(this, 'step1')" data-val="breezy">
+              <span class="finder-opt-icon">🌿</span> Breezy & Light
+            </div>
+            <div class="finder-opt" onclick="selectOpt(this, 'step1')" data-val="structured">
+              <span class="finder-opt-icon">📐</span> Structured & Crisp
+            </div>
+            <div class="finder-opt" onclick="selectOpt(this, 'step1')" data-val="cozy">
+              <span class="finder-opt-icon">🧣</span> Cozy & Soft
+            </div>
+          </div>
+          <div class="finder-nav">
+            <button class="finder-back" onclick="nextStep(0)">← Back</button>
+            <button class="finder-next" onclick="nextStep(2)">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div id="step2" style="display:none">
+          <p class="finder-q">Which colour story speaks to you?</p>
+          <div class="finder-options">
+            <div class="finder-opt" onclick="selectOpt(this, 'step2'); showResults()" data-val="warm">
+              <span class="finder-opt-icon" style="display:inline-block;width:16px;height:16px;background:#C4A882;border-radius:50%;vertical-align:middle;margin-right:4px"></span> Warm Earth Tones
+            </div>
+            <div class="finder-opt" onclick="selectOpt(this, 'step2'); showResults()" data-val="jewel">
+              <span class="finder-opt-icon" style="display:inline-block;width:16px;height:16px;background:#4A6741;border-radius:50%;vertical-align:middle;margin-right:4px"></span> Rich Jewel Tones
+            </div>
+            <div class="finder-opt" onclick="selectOpt(this, 'step2'); showResults()" data-val="neutral">
+              <span class="finder-opt-icon" style="display:inline-block;width:16px;height:16px;background:#B5AFA7;border-radius:50%;vertical-align:middle;margin-right:4px"></span> Soft Neutrals
+            </div>
+            <div class="finder-opt" onclick="selectOpt(this, 'step2'); showResults()" data-val="bold">
+              <span class="finder-opt-icon" style="display:inline-block;width:16px;height:16px;background:#C1583A;border-radius:50%;vertical-align:middle;margin-right:4px"></span> Bold & Vibrant
+            </div>
+          </div>
+          <div class="finder-nav">
+            <button class="finder-back" onclick="nextStep(1)">← Back</button>
+            <button class="finder-next" style="visibility:hidden">Next →</button>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="finder-results" id="finderResults">
+          <p class="finder-results-title">✦ Your Perfect Matches</p>
+          <div class="results-grid">
+            <div class="result-card" onclick="showToast('Added Tussar Silk Saree to cart!')">
+              <div class="result-swatch" style="background:linear-gradient(135deg,#C4A882,#8B6F47)"></div>
+              <div class="result-match">98% match</div>
+              <div class="result-name">Tussar Silk Saree</div>
+              <div class="result-price">PKR 12,500</div>
+            </div>
+            <div class="result-card" onclick="showToast('Added Banarasi Dupatta to cart!')">
+              <div class="result-swatch" style="background:linear-gradient(135deg,#A8893D,#7A6020)"></div>
+              <div class="result-match">94% match</div>
+              <div class="result-name">Banarasi Dupatta</div>
+              <div class="result-price">PKR 8,200</div>
+            </div>
+            <div class="result-card" onclick="showToast('Added Khaddar Fabric to cart!')">
+              <div class="result-swatch" style="background:linear-gradient(135deg,#C1583A,#8B3520)"></div>
+              <div class="result-match">89% match</div>
+              <div class="result-name">Khaddar Fabric</div>
+              <div class="result-price">PKR 3,800/m</div>
+            </div>
+            <div class="result-card" onclick="showToast('Added Lawn Collection to cart!')">
+              <div class="result-swatch" style="background:linear-gradient(135deg,#DDD0B8,#C5B49A)"></div>
+              <div class="result-match">85% match</div>
+              <div class="result-name">Lawn Collection</div>
+              <div class="result-price">PKR 2,400/m</div>
+            </div>
+          </div>
+          <button class="btn-primary" style="width:100%;margin-top:1.2rem" onclick="showToast('Opening full collection...')">View All Matches →</button>
+          <button type="button" class="finder-restart" onclick="resetFinder()">Start over</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="finder-info">
+      <h3 class="section-title">ThreadPath — Your Personalised Fabric Journey</h3>
+      <p>Instead of endlessly scrolling through hundreds of products, ThreadPath guides every customer through a curated 3-step discovery that surfaces only what is relevant to them — reducing decision fatigue and boosting conversion.</p>
+      <p>The experience is warm, guided, and intelligent — like having a knowledgeable sales assistant present at every moment of the journey.</p>
+      <div class="finder-stats">
+        <div class="finder-stat">
+          <div class="finder-stat-num">3×</div>
+          <div class="finder-stat-label">Higher conversion from guided shoppers</div>
+        </div>
+        <div class="finder-stat">
+          <div class="finder-stat-num">60s</div>
+          <div class="finder-stat-label">Average time to personalised results</div>
+        </div>
+        <div class="finder-stat">
+          <div class="finder-stat-num">40%</div>
+          <div class="finder-stat-label">Reduction in cart abandonment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEXTURE EXPLORER -->
+<section class="section explorer-section" id="explorer">
+  <p class="section-label">Feature 02 — Texture Explorer</p>
+  <div class="explorer-wrap">
+    <div>
+      <h2 class="section-title">Feel the Weave<br>Before You Buy</h2>
+      <p class="section-sub">Hover over any fabric to reveal its microscopic weave structure. Inspect thread density, pattern repeat, and texture depth — details that matter when choosing fabric.</p>
+
+      <div class="swatch-picker">
+        <div class="swatch-btn active" data-hex="#A07B50" style="background:linear-gradient(135deg,#C4A882,#8B6F47)" onclick="setExplorerSwatch(this, '#A07B50')" title="Tussar Gold"></div>
+        <div class="swatch-btn" data-hex="#3D5A30" style="background:linear-gradient(135deg,#4A6741,#2C3E2D)" onclick="setExplorerSwatch(this, '#3D5A30')" title="Forest Linen"></div>
+        <div class="swatch-btn" data-hex="#8B3520" style="background:linear-gradient(135deg,#C1583A,#8B3520)" onclick="setExplorerSwatch(this, '#8B3520')" title="Terra Silk"></div>
+        <div class="swatch-btn" data-hex="#3A4D5C" style="background:linear-gradient(135deg,#5A6B7A,#34444F)" onclick="setExplorerSwatch(this, '#3A4D5C')" title="Slate Cotton"></div>
+        <div class="swatch-btn" data-hex="#C5B49A" style="background:linear-gradient(135deg,#E8DFC8,#C5B49A)" onclick="setExplorerSwatch(this, '#C5B49A')" title="Ivory Linen"></div>
+      </div>
+
+      <div class="explorer-canvas-wrap" id="explorerCanvas" onmousemove="moveMagnifier(event)" onmouseenter="showMagnifier()" onmouseleave="hideMagnifier()">
+        <div class="explorer-base" id="explorerBase">
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+          <div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div><div class="weave-cell"></div>
+        </div>
+        <div class="magnifier" id="magnifier">
+          <div class="magnifier-inner" id="magnifierInner"></div>
+          <div class="magnifier-crosshair"></div>
+        </div>
+      </div>
+
+      <div class="explorer-info-box">
+        <div class="explorer-detail-label">Fabric Detail — Tussar Silk</div>
+        <div class="explorer-specs">
+          <div class="explorer-spec-item"><label>Thread Count</label><span>280 / sq inch</span></div>
+          <div class="explorer-spec-item"><label>Weave Type</label><span>Plain Weave</span></div>
+          <div class="explorer-spec-item"><label>Weight</label><span>85 gsm</span></div>
+          <div class="explorer-spec-item"><label>Shrinkage</label><span>&lt; 2%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="section-title" style="color:var(--cream);font-size:1.8rem;margin-bottom:1rem">Why This Matters</h2>
+      <p style="color:var(--muted-light);line-height:1.8;margin-bottom:1.5rem">Online fabric shopping has one critical gap — you cannot touch it. The Texture Explorer closes this gap with an interactive zoom lens that reveals weave structure at near-microscopic detail.</p>
+      <p style="color:var(--muted-light);line-height:1.8;margin-bottom:1.5rem">Combined with thread count data, weave type classification, and care information — all surfaced contextually — customers gain the confidence to purchase premium fabrics online.</p>
+
+      <div style="border:1px solid rgba(255,255,255,0.1);padding:1.5rem;margin-top:1rem">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted-light);margin-bottom:1rem">Impact Metrics</div>
+        <div class="explorer-metrics-grid">
+          <div style="border-left:2px solid var(--terracotta);padding-left:1rem">
+            <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--cream)">68%</div>
+            <div style="font-size:0.75rem;color:var(--muted-light)">Increase in premium fabric purchases</div>
+          </div>
+          <div style="border-left:2px solid var(--gold);padding-left:1rem">
+            <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--cream)">52%</div>
+            <div style="font-size:0.75rem;color:var(--muted-light)">Reduction in return rates</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR STORY SECTION -->
+<section class="section colorstory-section" id="collections" style="padding-bottom:0">
+  <p class="section-label">Feature 03 — Colour Story</p>
+  <h2 class="section-title">Shop by Colour Narrative</h2>
+  <p class="section-sub">Instead of colour filters, customers explore curated colour stories — each representing a mood, season, or aesthetic that tells a visual story and groups complementary products together.</p>
+</section>
+<div class="colorstory-grid">
+  <div class="color-story-block c-warm" onclick="showToast('Browsing: Warm Earth Stories')">
+    <div class="color-story-label">
+      <div class="color-story-name">Warm Earth</div>
+      <div class="color-story-sub">28 Products</div>
+    </div>
+  </div>
+  <div class="color-story-block c-forest" onclick="showToast('Browsing: Forest Depths')">
+    <div class="color-story-label">
+      <div class="color-story-name">Forest Depths</div>
+      <div class="color-story-sub">19 Products</div>
+    </div>
+  </div>
+  <div class="color-story-block c-terra" onclick="showToast('Browsing: Terra Bloom')">
+    <div class="color-story-label">
+      <div class="color-story-name">Terra Bloom</div>
+      <div class="color-story-sub">34 Products</div>
+    </div>
+  </div>
+  <div class="color-story-block c-slate" onclick="showToast('Browsing: Slate & Stone')">
+    <div class="color-story-label">
+      <div class="color-story-name">Slate & Stone</div>
+      <div class="color-story-sub">22 Products</div>
+    </div>
+  </div>
+  <div class="color-story-block c-ivory" onclick="showToast('Browsing: Ivory Heirloom')">
+    <div class="color-story-label">
+      <div class="color-story-name">Ivory Heirloom</div>
+      <div class="color-story-sub">41 Products</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<section class="section product-section">
+  <p class="section-label">Feature 04 — Enhanced Product Detail</p>
+  <div class="product-wrap">
+    <div class="product-images">
+      <div class="product-main-img">
+        <div class="product-main-img-inner" id="mainProductImg">
+          <!-- Weave pattern visual -->
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+          <div class="product-weave-line"></div><div class="product-weave-line"></div><div class="product-weave-line"></div>
+        </div>
+        <span class="product-badge-new">New Arrival</span>
+        <button class="product-wishlist" onclick="showToast('♡ Saved to Wishlist')">♡</button>
+      </div>
+      <div class="product-thumbs">
+        <div class="product-thumb thumb-t1 active-thumb" onclick="setThumb(this, '#C4A882', '#8B6F47')"></div>
+        <div class="product-thumb thumb-t2" onclick="setThumb(this, '#4A6741', '#7A9A70')"></div>
+        <div class="product-thumb thumb-t3" onclick="setThumb(this, '#C1583A', '#E8856A')"></div>
+        <div class="product-thumb thumb-t4" onclick="setThumb(this, '#5A6B7A', '#8A9BAA')"></div>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <div class="product-category">Handwoven Silk · Weaves Signature</div>
+      <h2 class="product-name">Katan Silk<br>Pure Saree</h2>
+      <p class="product-tagline">"Woven with generational craft, dressed for every generation."</p>
+
+      <div class="product-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-count">4.9 (142 reviews)</span>
+      </div>
+
+      <div class="product-price">PKR 18,500 <span class="price-old">PKR 22,000</span></div>
+
+      <div class="tab-row">
+        <button type="button" class="tab-btn tab-active" onclick="switchTab('details', this)">Details</button>
+        <button type="button" class="tab-btn" onclick="switchTab('care', this)">Care</button>
+        <button type="button" class="tab-btn" onclick="switchTab('story', this)">Story</button>
+      </div>
+
+      <div class="tab-panel panel-active" id="tab-details">
+        <div class="product-attr">
+          <div class="attr-label">Colour</div>
+          <div class="color-swatches">
+            <div class="color-swatch-btn active" style="background:#C4A882" onclick="activeSwatch(this)"></div>
+            <div class="color-swatch-btn" style="background:#4A6741" onclick="activeSwatch(this)"></div>
+            <div class="color-swatch-btn" style="background:#C1583A" onclick="activeSwatch(this)"></div>
+            <div class="color-swatch-btn" style="background:#5A6B7A" onclick="activeSwatch(this)"></div>
+            <div class="color-swatch-btn" style="background:#2C3E50" onclick="activeSwatch(this)"></div>
+          </div>
+        </div>
+        <div class="product-attr">
+          <div class="attr-label">Length</div>
+          <div class="size-swatches">
+            <button class="size-btn" onclick="activeSizeBtn(this)">5.5m</button>
+            <button class="size-btn active-size" onclick="activeSizeBtn(this)">6m</button>
+            <button class="size-btn" onclick="activeSizeBtn(this)">6.5m</button>
+            <button class="size-btn" onclick="activeSizeBtn(this)">Custom</button>
+          </div>
+        </div>
+        <div class="quantity-row">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <div class="qty-num" id="qtyNum">1</div>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <div class="add-to-cart-row">
+          <button class="btn-atc" onclick="showToast('✓ Added to cart! 2 items in cart.')">Add to Cart</button>
+          <button class="btn-save" onclick="showToast('♡ Saved to Wishlist')">♡</button>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-care">
+        <div class="product-care">
+          <div class="care-row">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#C1583A" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="#C1583A" stroke-width="1"/></svg>
+            Dry clean recommended for best results
+          </div>
+          <div class="care-row">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#C1583A" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="#C1583A" stroke-width="1"/></svg>
+            Store in a cool, dry place away from sunlight
+          </div>
+          <div class="care-row">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#C1583A" stroke-width="1"/><path d="M5 8l2 2 4-4" stroke="#C1583A" stroke-width="1"/></svg>
+            Iron on low heat with a protective cloth
+          </div>
+          <div class="care-row">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#A33" stroke-width="1"/><path d="M6 6l4 4M10 6l-4 4" stroke="#A33" stroke-width="1"/></svg>
+            Do not bleach or tumble dry
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-story">
+        <p style="color:var(--muted);line-height:1.8;margin-top:1rem;font-size:0.9rem">This Katan Silk Saree is handwoven by master craftspeople in Varanasi, using a technique passed down across five generations. Each saree takes between 3 to 10 days to complete, depending on the intricacy of the pattern.</p>
+        <p style="color:var(--muted);line-height:1.8;margin-top:1rem;font-size:0.9rem">By purchasing from Weaves, you directly support over 200 artisan families and help preserve one of the world's oldest textile traditions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OCCASION SMART REORDER -->
+<section class="section reorder-section">
+  <p class="section-label">Feature 05 — Occasion Tagging & Smart Reorder</p>
+  <div class="reorder-layout">
+    <div>
+      <h2 class="section-title">Every Purchase,<br>Every Occasion</h2>
+      <p class="section-sub">Customers tag their purchases to occasions — weddings, Eid, office — and the platform surfaces them perfectly timed each year, making reordering effortless and remembering their past preferences automatic.</p>
+
+      <div>
+        <div class="attr-label" style="margin-bottom:0.7rem">Filter by Occasion</div>
+        <div class="occasion-tags">
+          <div class="occasion-tag tag-active" data-occasion="all" onclick="toggleTag(this)">All Orders</div>
+          <div class="occasion-tag" data-occasion="eid" onclick="toggleTag(this)">Eid Collection</div>
+          <div class="occasion-tag" data-occasion="wedding" onclick="toggleTag(this)">Wedding Season</div>
+          <div class="occasion-tag" data-occasion="office" onclick="toggleTag(this)">Office Wear</div>
+          <div class="occasion-tag" data-occasion="gift" onclick="toggleTag(this)">Gifted Items</div>
+          <div class="occasion-tag" data-occasion="winter" onclick="toggleTag(this)">Winter 2024</div>
+        </div>
+      </div>
+
+      <div class="orders-timeline">
+        <div class="order-item" data-occasion="eid">
+          <div class="order-date">October 2024</div>
+          <div class="order-card">
+            <div class="order-swatch" style="background:linear-gradient(135deg,#C4A882,#8B6F47)"></div>
+            <div class="order-info">
+              <span class="order-occasion-tag">Eid Collection</span>
+              <div class="order-name">Tussar Silk Dupatta</div>
+              <div class="order-meta">6m · Warm Gold · PKR 11,200</div>
+            </div>
+            <button class="btn-reorder" onclick="showToast('✓ Reordered! Proceeding to checkout.')">Reorder</button>
+          </div>
+        </div>
+        <div class="order-item" data-occasion="wedding">
+          <div class="order-date">March 2024</div>
+          <div class="order-card">
+            <div class="order-swatch" style="background:linear-gradient(135deg,#4A6741,#7A9A70)"></div>
+            <div class="order-info">
+              <span class="order-occasion-tag" style="background:var(--sage-light);color:var(--sage)">Wedding Season</span>
+              <div class="order-name">Banarasi Green Saree</div>
+              <div class="order-meta">6.5m · Forest Green · PKR 19,800</div>
+            </div>
+            <button class="btn-reorder" onclick="showToast('✓ Reordered! Proceeding to checkout.')">Reorder</button>
+          </div>
+        </div>
+        <div class="order-item" data-occasion="office">
+          <div class="order-date">December 2023</div>
+          <div class="order-card">
+            <div class="order-swatch" style="background:linear-gradient(135deg,#5A6B7A,#8A9BAA)"></div>
+            <div class="order-info">
+              <span class="order-occasion-tag" style="background:var(--gold-light);color:var(--gold)">Office Wear</span>
+              <div class="order-name">Khaddar Winter Set</div>
+              <div class="order-meta">3m · Slate Blue · PKR 7,400</div>
+            </div>
+            <button class="btn-reorder" onclick="showToast('✓ Reordered! Proceeding to checkout.')">Reorder</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:1rem">How It Works</h3>
+      <p style="color:var(--muted);line-height:1.8;margin-bottom:2rem">After purchase, customers tag their order with a relevant occasion. The platform remembers this and sends timely, personalised reminders — "Eid is in 30 days. Ready to refresh your collection?"</p>
+
+      <div style="background:var(--cream);border:1px solid var(--border);padding:1.5rem;margin-bottom:1rem">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.7rem">Smart Notification Preview</div>
+        <div style="display:flex;align-items:flex-start;gap:0.8rem">
+          <div style="width:36px;height:36px;background:var(--terracotta);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;color:#fff;font-weight:600">W</div>
+          <div style="flex:1">
+            <div style="font-size:0.82rem;font-weight:500;margin-bottom:0.3rem">Weaves — Eid Reminder</div>
+            <div style="font-size:0.8rem;color:var(--muted);line-height:1.5">Eid is in 28 days! Last year you loved your Tussar Silk Dupatta. Ready to find something new — or reorder your favourite?</div>
+            <div style="display:flex;gap:0.5rem;margin-top:0.7rem">
+              <button class="btn-primary" style="padding:0.4rem 0.9rem;font-size:0.75rem" onclick="showToast('Opening Eid Collection...')">Shop Eid →</button>
+              <button class="btn-outline" style="padding:0.4rem 0.9rem;font-size:0.75rem" onclick="showToast('Quick reorder initiated!')">Quick Reorder</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--cream);border:1px solid var(--border);padding:1.5rem">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">Business Impact</div>
+        <div class="reorder-impact-grid">
+          <div style="border-left:2px solid var(--sage);padding-left:1rem">
+            <div style="font-family:'Playfair Display',serif;font-size:1.5rem">2.4×</div>
+            <div style="font-size:0.75rem;color:var(--muted)">Customer lifetime value with tagging</div>
+          </div>
+          <div style="border-left:2px solid var(--gold);padding-left:1rem">
+            <div style="font-family:'Playfair Display',serif;font-size:1.5rem">71%</div>
+            <div style="font-size:0.75rem;color:var(--muted)">Open rate on occasion-based notifications</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER JOURNEY -->
+<section class="journey-section">
+  <div style="max-width:800px;margin:0 auto;text-align:center">
+    <p class="section-label" style="text-align:center">The Complete ThreadPath Journey</p>
+    <h2 class="section-title" style="text-align:center">From Discovery to Devotion</h2>
+    <p style="color:var(--muted);line-height:1.7;max-width:560px;margin:0 auto 0">Each feature is designed to reduce friction at a different stage of the customer journey — creating a seamless loop that turns first-time visitors into loyal, repeat customers.</p>
+  </div>
+  <div class="journey-steps">
+    <div class="journey-step">
+      <div class="step-num">1</div>
+      <div class="step-title">Discover</div>
+      <div class="step-desc">ThreadPath quiz surfaces the right products in 60 seconds</div>
+    </div>
+    <div class="journey-step">
+      <div class="step-num">2</div>
+      <div class="step-title">Inspect</div>
+      <div class="step-desc">Texture Explorer builds confidence through detail</div>
+    </div>
+    <div class="journey-step">
+      <div class="step-num">3</div>
+      <div class="step-title">Choose</div>
+      <div class="step-desc">Colour Stories and product tabs simplify decisions</div>
+    </div>
+    <div class="journey-step">
+      <div class="step-num">4</div>
+      <div class="step-title">Purchase</div>
+      <div class="step-desc">Streamlined checkout with smart payment recall</div>
+    </div>
+    <div class="journey-step">
+      <div class="step-num">5</div>
+      <div class="step-title">Return</div>
+      <div class="step-desc">Occasion tagging makes reordering natural and timely</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKOUT -->
+<section class="section checkout-section">
+  <p class="section-label">Feature 06 — Streamlined Checkout</p>
+  <h2 class="section-title">Checkout Without<br>the Friction</h2>
+  <p class="section-sub">A clean, distraction-free checkout experience with smart address recall, flexible payment options, and a transparent order summary — designed to minimise drop-off at the most critical step.</p>
+
+  <div class="checkout-grid">
+    <div class="checkout-form">
+      <div class="form-section-title">Delivery Information</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" placeholder="Ayesha" value="Ayesha">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" placeholder="Khan" value="Khan">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Delivery Address</label>
+        <input type="text" class="form-input" placeholder="Street, Area, City" value="House 14, Block C, DHA Phase 5">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">City</label>
+          <input type="text" class="form-input" value="Karachi">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="text" class="form-input" value="+92 300 1234567">
+        </div>
+      </div>
+
+      <div class="form-section-title" style="margin-top:1.5rem">Payment Method</div>
+      <div class="smart-pay-options">
+        <div class="pay-opt selected-pay" onclick="selectPay(this)">
+          <div class="pay-opt-radio"></div>
+          <div class="pay-opt-text">Credit / Debit Card (Visa •••• 4821)</div>
+        </div>
+        <div class="pay-opt" onclick="selectPay(this)">
+          <div class="pay-opt-radio"></div>
+          <div class="pay-opt-text">EasyPaisa / JazzCash</div>
+        </div>
+        <div class="pay-opt" onclick="selectPay(this)">
+          <div class="pay-opt-radio"></div>
+          <div class="pay-opt-text">Cash on Delivery</div>
+        </div>
+        <div class="pay-opt" onclick="selectPay(this)">
+          <div class="pay-opt-radio"></div>
+          <div class="pay-opt-text">Bank Transfer</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checkout-summary">
+      <div class="summary-title">Order Summary</div>
+      <div class="summary-item">
+        <div class="summary-item-swatch" style="background:linear-gradient(135deg,#C4A882,#8B6F47)"></div>
+        <div class="summary-item-info">
+          <div class="summary-item-name">Katan Silk Saree</div>
+          <div class="summary-item-meta">6m · Warm Gold · Qty: 1</div>
+        </div>
+        <div class="summary-item-price">PKR 18,500</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-item-swatch" style="background:linear-gradient(135deg,#4A6741,#7A9A70)"></div>
+        <div class="summary-item-info">
+          <div class="summary-item-name">Tussar Silk Dupatta</div>
+          <div class="summary-item-meta">2.5m · Forest Green · Qty: 1</div>
+        </div>
+        <div class="summary-item-price">PKR 6,800</div>
+      </div>
+      <hr class="summary-divider">
+      <div class="summary-row"><span>Subtotal</span><span>PKR 25,300</span></div>
+      <div class="summary-row"><span>Delivery</span><span style="color:#5F7A5A">Free</span></div>
+      <div class="summary-row"><span>Discount (10%)</span><span style="color:#C1583A">−PKR 2,530</span></div>
+      <hr class="summary-divider">
+      <div class="summary-total">
+        <span class="summary-total-label">Total</span>
+        <span class="summary-total-price">PKR 22,770</span>
+      </div>
+      <button class="btn-place-order" onclick="showToast('✓ Order placed successfully! Thank you.')">Place Order →</button>
+      <div style="text-align:center;margin-top:1rem;font-size:0.72rem;color:var(--muted-light)">🔒 Secured by 256-bit SSL encryption</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPOSAL SUMMARY -->
+<section class="proposal-section" id="about">
+  <p class="section-label">Proposal Summary</p>
+  <h2 class="section-title">Six Features.<br>One Seamless Experience.</h2>
+  <p class="section-sub" style="margin-bottom:3rem">ThreadPath is a holistic UX upgrade for Weaves — not individual features but a complete, interconnected customer journey designed to increase engagement, reduce friction, and build lasting loyalty.</p>
+
+  <div class="proposal-grid">
+    <div class="proposal-card">
+      <div class="proposal-num">01 / DISCOVERY</div>
+      <h3>Smart Fabric Finder</h3>
+      <p>A guided 3-step quiz that replaces endless browsing with a personalised, curated shortlist. Reduces decision fatigue and increases purchase confidence for first-time customers.</p>
+    </div>
+    <div class="proposal-card">
+      <div class="proposal-num">02 / INSPECTION</div>
+      <h3>Texture Explorer</h3>
+      <p>An interactive zoom magnifier that lets customers inspect weave structure at detail impossible in physical retail. Closes the tactile gap of online fabric shopping.</p>
+    </div>
+    <div class="proposal-card">
+      <div class="proposal-num">03 / CURATION</div>
+      <h3>Colour Story Navigation</h3>
+      <p>Replace colour filters with narrative-driven colour stories. Customers explore moods and aesthetics, not hex codes — creating an emotional connection to the collection.</p>
+    </div>
+    <div class="proposal-card">
+      <div class="proposal-num">04 / CONFIDENCE</div>
+      <h3>Enhanced Product Detail</h3>
+      <p>Tabbed product pages with fabric story, care instructions, and artisan origin. Built to give customers the full context they need to justify a premium purchase.</p>
+    </div>
+    <div class="proposal-card">
+      <div class="proposal-num">05 / RETENTION</div>
+      <h3>Occasion Tagging & Reorder</h3>
+      <p>Post-purchase occasion tagging creates a smart purchase history that enables timely, personalised re-engagement — turning seasonal shoppers into year-round customers.</p>
+    </div>
+    <div class="proposal-card">
+      <div class="proposal-num">06 / CONVERSION</div>
+      <h3>Streamlined Checkout</h3>
+      <p>A distraction-free, mobile-optimised checkout with smart address recall and flexible local payment options — designed specifically for the Pakistani e-commerce customer.</p>
+    </div>
+  </div>
+
+  <div class="proposal-metrics">
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--terracotta)">3×</div>
+      <div style="font-size:0.8rem;color:var(--muted)">Conversion rate from guided discovery</div>
+    </div>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--terracotta)">52%</div>
+      <div style="font-size:0.8rem;color:var(--muted)">Reduction in return rates</div>
+    </div>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--terracotta)">2.4×</div>
+      <div style="font-size:0.8rem;color:var(--muted)">Customer lifetime value increase</div>
+    </div>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--terracotta)">40%</div>
+      <div style="font-size:0.8rem;color:var(--muted)">Reduction in cart abandonment</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">WEAVES.</div>
+    <div style="font-size:0.75rem;color:var(--muted);margin-top:0.3rem">ThreadPath — E-Commerce UX Proposal</div>
+  </div>
+  <div class="footer-note">Prepared for: Weaves Corporation Limited — Intern Application, E-Commerce Application Development</div>
+  <div style="font-size:0.75rem">2026 Design Proposal</div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
